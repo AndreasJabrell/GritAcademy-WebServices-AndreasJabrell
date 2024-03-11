@@ -2,5 +2,5 @@ package com.GritAcademyPortal.courses;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface CoursesRepository extends JpaRepository <Courses, Integer> {
+public interface CoursesRepository extends JpaRepository<Courses, Integer> {
 }

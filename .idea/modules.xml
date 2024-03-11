@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/GritAcademy-WebServices-AndreasJabrell.iml" filepath="$PROJECT_DIR$/.idea/GritAcademy-WebServices-AndreasJabrell.iml" />
+      <module fileurl="file://$PROJECT_DIR$/GritAcademyPortal/GritAcademyPortal.iml" filepath="$PROJECT_DIR$/GritAcademyPortal/GritAcademyPortal.iml" />
+    </modules>
+  </component>
+</project>

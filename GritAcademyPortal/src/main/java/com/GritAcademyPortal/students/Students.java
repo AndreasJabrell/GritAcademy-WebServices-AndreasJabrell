@@ -24,7 +24,13 @@ public class Students {
     private Integer id;
 
     @Column(name = "fname")
-    private String fname;
+    private String fName;
+
+    @Column(name = "lname")
+    private String lName;
+
+    @Column(name = "town")
+    private String town;
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
@@ -32,5 +38,6 @@ public class Students {
             joinColumns = @JoinColumn(name = "students_id"),
             inverseJoinColumns = @JoinColumn(name = "courses_id"))
     private Set<Courses> courses = new HashSet<>();
+
 
 }
