@@ -18,6 +18,7 @@ public class StudentsService {
 
     public List<StudentsDTO> getStudents() {
         List<StudentsDTO> studentsDTO = new ArrayList<>();
+
         studentsRepository.findAll().forEach(students -> studentsDTO.add(this.mapToDTO(students)));
         return studentsDTO;
 
@@ -29,6 +30,9 @@ public class StudentsService {
             return students1;
         });
         return students.stream()
+                /**
+                 *Istället för .map här kan man använda olika roliga grejer för att sortera/räkna/splitta osv.
+                 **/
                 .map(this::mapToDTO)
                 .collect(Collectors.toList());
     }

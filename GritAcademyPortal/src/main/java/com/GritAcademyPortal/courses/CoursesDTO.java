@@ -1,6 +1,9 @@
 package com.GritAcademyPortal.courses;
 
+import com.GritAcademyPortal.students.StudentsDTO;
 import lombok.Data;
+
+import java.util.List;
 
 @Data
 public class CoursesDTO {
@@ -8,5 +11,5 @@ public class CoursesDTO {
     private String name;
     private Integer YHP;
     private String description;
-    //List<StudentsDTO> students;
+    List<StudentsDTO> students;
 }
