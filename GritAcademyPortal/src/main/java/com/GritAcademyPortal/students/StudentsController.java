@@ -29,4 +29,24 @@ public class StudentsController {
         List<StudentsDTO> studentsDTO = studentsService.getCoursesForStudents(id);
         return new ResponseEntity<>(studentsDTO, HttpStatus.OK);
     }
+
+    @GetMapping(value = "/studentsfName/{fName}/courses", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<StudentsDTO>> getStudentsByfName(@PathVariable(value = "fName") String fName) {
+        List<StudentsDTO> studentsDTO = studentsService.getStudentsWithCoursesByfName(fName);
+        return new ResponseEntity<>(studentsDTO, HttpStatus.OK);
+    }
+
+    @GetMapping(value = "/studentslName/{lName}/courses", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<StudentsDTO>> getStudentsBylName(@PathVariable(value = "lName") String lName) {
+        List<StudentsDTO> studentsDTO = studentsService.getStudentsWithCoursesBylName(lName);
+        return new ResponseEntity<>(studentsDTO, HttpStatus.OK);
+    }
+
+    @GetMapping(value = "/studentstown/{town}/courses", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<StudentsDTO>> getStudentsByTown(@PathVariable(value = "town") String town) {
+        List<StudentsDTO> studentsDTO = studentsService.getStudentsWithCoursesByTown(town);
+        return new ResponseEntity<>(studentsDTO, HttpStatus.OK);
+    }
+
+
 }

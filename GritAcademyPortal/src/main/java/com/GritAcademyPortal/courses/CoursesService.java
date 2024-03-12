@@ -1,10 +1,15 @@
 package com.GritAcademyPortal.courses;
 
+import com.GritAcademyPortal.students.Students;
+import com.GritAcademyPortal.students.StudentsDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class CoursesService {
@@ -15,14 +20,57 @@ public class CoursesService {
     public List<CoursesDTO> getCourses() {
 
         List<CoursesDTO> coursesDTO = new ArrayList<>();
-        coursesRepository.findAll().forEach(courses -> coursesDTO.add(this.mapToDTO(courses)));
+        coursesRepository.findAll().forEach(courses -> coursesDTO.add(this.mapToDTOBasic(courses)));
 
         return coursesDTO;
 
     }
 
+    public List<CoursesDTO> getCoursesByName(String name) {
+        List<Courses> coursesList = coursesRepository.findByNameContainingOrderById(name);
+        if (!coursesList.isEmpty()) {
+            return coursesList.stream()
+                    .map(this::mapToDTOBasic)
+                    .collect(Collectors.toList());
+        } else {
+            return Collections.emptyList();
+        }
+    }
 
-    private CoursesDTO mapToDTO(Courses courses) {
+    public List<CoursesDTO> getCoursesByDescription(String description) {
+        List<Courses> coursesList = coursesRepository.findByDescriptionContainingOrderById(description);
+        if (!coursesList.isEmpty()) {
+            return coursesList.stream()
+                    .map(this::mapToDTOBasic)
+                    .collect(Collectors.toList());
+        } else {
+            return Collections.emptyList();
+        }
+    }
+
+    public List<CoursesDTO> getCoursesByIdWithStudents(Integer id) {
+        Optional<Courses> studentsList = coursesRepository.findById(id);
+        if (studentsList.isPresent()) {
+            return studentsList.stream()
+                    .map(this::mapToDTO)
+                    .collect(Collectors.toList());
+        } else {
+            return Collections.emptyList();
+        }
+    }
+
+    public List<CoursesDTO> getCoursesByNameWithStudents(String name) {
+        List<Courses> coursesList = coursesRepository.findByNameContainingOrderById(name);
+        if (!coursesList.isEmpty()) {
+            return coursesList.stream()
+                    .map(this::mapToDTO)
+                    .collect(Collectors.toList());
+        } else {
+            return Collections.emptyList();
+        }
+    }
+
+    private CoursesDTO mapToDTOBasic(Courses courses) {
         CoursesDTO dto = new CoursesDTO();
         dto.setId(courses.getId());
         dto.setName(courses.getName());
@@ -30,4 +78,26 @@ public class CoursesService {
         dto.setDescription(courses.getDescription());
         return dto;
     }
+
+    private CoursesDTO mapToDTO(Courses courses) {
+        CoursesDTO dto = new CoursesDTO();
+        dto.setId(courses.getId());
+        dto.setName(courses.getName());
+        dto.setYHP(courses.getYHP());
+        dto.setDescription(courses.getDescription());
+        dto.setStudents(courses.getStudents().stream()
+                .map(this::mapToDTO)
+                .collect(Collectors.toList()));
+        return dto;
+    }
+
+    private StudentsDTO mapToDTO(Students students) {
+        StudentsDTO dto = new StudentsDTO();
+        dto.setId(students.getId());
+        dto.setFName(students.getFName());
+        dto.setLName(students.getLName());
+        dto.setTown(students.getTown());
+        return dto;
+    }
+
 }

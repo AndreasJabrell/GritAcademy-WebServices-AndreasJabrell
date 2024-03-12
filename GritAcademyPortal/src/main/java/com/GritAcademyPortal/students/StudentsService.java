@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -30,31 +31,63 @@ public class StudentsService {
             return students1;
         });
         return students.stream()
-                /**
-                 *Istället för .map här kan man använda olika roliga grejer för att sortera/räkna/splitta osv.
-                 **/
+                /**Istället för .map här kan man använda olika roliga grejer för att sortera/räkna/splitta osv.**/
                 .map(this::mapToDTO)
                 .collect(Collectors.toList());
     }
+
+    public List<StudentsDTO> getStudentsWithCoursesByfName(String fName) {
+        List<Students> studentsList = studentsRepository.findByfNameContainingOrderByFName(fName);
+        if (!studentsList.isEmpty()) {
+            return studentsList.stream()
+                    .map(this::mapToDTO)
+                    .collect(Collectors.toList());
+        } else {
+            return Collections.emptyList();
+        }
+    }
+
+    public List<StudentsDTO> getStudentsWithCoursesBylName(String lName) {
+        List<Students> studentsList = studentsRepository.findBylNameContainingOrderByLName(lName);
+        if (!studentsList.isEmpty()) {
+            return studentsList.stream()
+                    .map(this::mapToDTO)
+                    .collect(Collectors.toList());
+        } else {
+            return Collections.emptyList();
+        }
+    }
+
+    public List<StudentsDTO> getStudentsWithCoursesByTown(String town) {
+        List<Students> studentsList = studentsRepository.findByTownContainingOrderByTown(town);
+        if (!studentsList.isEmpty()) {
+            return studentsList.stream()
+                    .map(this::mapToDTO)
+                    .collect(Collectors.toList());
+        } else {
+            return Collections.emptyList();
+        }
+    }
+
 
     /**
      * Använd 2 mapToDTO för students, en med courses lista och en utan. Samma för Courses.
      * Vill man inte använda 2 listor kanske man kan göra en if-sats eller nåt för att kolla
      * om man ska använda lista eller inte. Så man kolla om man behöver listan eller inte med nån hjälp, typ flagga?
      * Kanske nåt sånt här?
-     *
-     *     private StudentsDTO mapToDTO(Students students, Boolean addList) {
-     *         StudentsDTO dto = new StudentsDTO();
-     *         dto.setId(students.getId());
-     *         dto.setFName(students.getFName());
-     *         dto.setLName(students.getLName());
-     *         dto.setTown(students.getTown());
-     *         if (addList)dto.setCourses(students.getCourses().stream()
-     *                 .map(students -> mapToDTO(students, false))
-     *                 .collect(Collectors.toList()));
-     *         return dto;
-     *     }
-     *     **/
+     * <p>
+     * private StudentsDTO mapToDTO(Students students, Boolean addList) {
+     * StudentsDTO dto = new StudentsDTO();
+     * dto.setId(students.getId());
+     * dto.setFName(students.getFName());
+     * dto.setLName(students.getLName());
+     * dto.setTown(students.getTown());
+     * if (addList)dto.setCourses(students.getCourses().stream()
+     * .map(students -> mapToDTO(students, false))
+     * .collect(Collectors.toList()));
+     * return dto;
+     * }
+     **/
     private StudentsDTO mapToDTO(Students students) {
         StudentsDTO dto = new StudentsDTO();
         dto.setId(students.getId());
