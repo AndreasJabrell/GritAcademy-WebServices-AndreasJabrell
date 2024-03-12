@@ -6,9 +6,9 @@ import java.util.List;
 
 public interface StudentsRepository extends JpaRepository<Students, Integer> {
 
-    List<Students> findByfNameContainingOrderByFName(String fName);
+    List<Students> findByfNameContaining(String fName);
 
-    List<Students> findBylNameContainingOrderByLName(String lName);
+    List<Students> findBylNameContaining(String lName);
 
     List<Students> findByTownContainingOrderByTown(String town);
 

@@ -37,7 +37,7 @@ public class StudentsService {
     }
 
     public List<StudentsDTO> getStudentsWithCoursesByfName(String fName) {
-        List<Students> studentsList = studentsRepository.findByfNameContainingOrderByFName(fName);
+        List<Students> studentsList = studentsRepository.findByfNameContaining(fName);
         if (!studentsList.isEmpty()) {
             return studentsList.stream()
                     .map(this::mapToDTO)
@@ -48,7 +48,7 @@ public class StudentsService {
     }
 
     public List<StudentsDTO> getStudentsWithCoursesBylName(String lName) {
-        List<Students> studentsList = studentsRepository.findBylNameContainingOrderByLName(lName);
+        List<Students> studentsList = studentsRepository.findBylNameContaining(lName);
         if (!studentsList.isEmpty()) {
             return studentsList.stream()
                     .map(this::mapToDTO)
