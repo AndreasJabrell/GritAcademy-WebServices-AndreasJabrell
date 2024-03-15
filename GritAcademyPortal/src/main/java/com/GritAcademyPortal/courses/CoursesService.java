@@ -27,7 +27,7 @@ public class CoursesService {
     }
 
     public List<CoursesDTO> getCoursesByName(String name) {
-        List<Courses> coursesList = coursesRepository.findByNameContainingOrderById(name);
+        List<Courses> coursesList = coursesRepository.findByNameContaining(name);
         if (!coursesList.isEmpty()) {
             return coursesList.stream()
                     .map(this::mapToDTOBasic)
@@ -38,7 +38,7 @@ public class CoursesService {
     }
 
     public List<CoursesDTO> getCoursesByDescription(String description) {
-        List<Courses> coursesList = coursesRepository.findByDescriptionContainingOrderById(description);
+        List<Courses> coursesList = coursesRepository.findByDescriptionContaining(description);
         if (!coursesList.isEmpty()) {
             return coursesList.stream()
                     .map(this::mapToDTOBasic)
@@ -60,7 +60,7 @@ public class CoursesService {
     }
 
     public List<CoursesDTO> getCoursesByNameWithStudents(String name) {
-        List<Courses> coursesList = coursesRepository.findByNameContainingOrderById(name);
+        List<Courses> coursesList = coursesRepository.findByNameContaining(name);
         if (!coursesList.isEmpty()) {
             return coursesList.stream()
                     .map(this::mapToDTO)
@@ -69,7 +69,7 @@ public class CoursesService {
             return Collections.emptyList();
         }
     }
-
+    //Used to only display the course/s
     private CoursesDTO mapToDTOBasic(Courses courses) {
         CoursesDTO dto = new CoursesDTO();
         dto.setId(courses.getId());
@@ -78,6 +78,7 @@ public class CoursesService {
         dto.setDescription(courses.getDescription());
         return dto;
     }
+    //Used to display courses with students as it also has a list of "StudentsDTO" derived from the mapToDTO below this one
 
     private CoursesDTO mapToDTO(Courses courses) {
         CoursesDTO dto = new CoursesDTO();

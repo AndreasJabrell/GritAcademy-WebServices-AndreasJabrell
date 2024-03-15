@@ -3,9 +3,7 @@ package com.GritAcademyPortal.students;
 import com.GritAcademyPortal.courses.Courses;
 import com.GritAcademyPortal.courses.CoursesDTO;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -27,17 +25,12 @@ public class StudentsService {
 
     }
 
-/*
-    public List<StudentsDTO> findStudentById(Integer id){
-        List<StudentsDTO> studentsDTO = new ArrayList<>();
-        studentsRepository.findById(id).forEach(students -> studentsDTO.add(this.mapToDTOBasic(students)));
-        return studentsDTO;
+    public void removeStudentById(Long id) {
+        studentsRepository.deleteById(id);
     }
-*/
 
-    @Transactional
-    public void deleteById(Long id){
-        studentsRepository.deleteStudentsById(id);
+    public Students saveStudent(Students students) {
+        return studentsRepository.save(students);
     }
 
 
@@ -84,27 +77,7 @@ public class StudentsService {
             return Collections.emptyList();
         }
     }
-
-
-    /**
-     * Använd 2 mapToDTO för students, en med courses lista och en utan. Samma för Courses.
-     * Vill man inte använda 2 listor kanske man kan göra en if-sats eller nåt för att kolla
-     * om man ska använda lista eller inte. Så man kolla om man behöver listan eller inte med nån hjälp, typ flagga?
-     * Kanske nåt sånt här?
-     * <p>
-     * private StudentsDTO mapToDTO(Students students, Boolean addList) {
-     * StudentsDTO dto = new StudentsDTO();
-     * dto.setId(students.getId());
-     * dto.setFName(students.getFName());
-     * dto.setLName(students.getLName());
-     * dto.setTown(students.getTown());
-     * if (addList)dto.setCourses(students.getCourses().stream()
-     * .map(students -> mapToDTO(students, false))
-     * .collect(Collectors.toList()));
-     * return dto;
-     * }
-     **/
-
+    //Used to only display the student/s
     private StudentsDTO mapToDTOBasic(Students students) {
         StudentsDTO dto = new StudentsDTO();
         dto.setId(students.getId());
@@ -113,7 +86,7 @@ public class StudentsService {
         dto.setTown(students.getTown());
         return dto;
     }
-
+    //Used to display students with courses as it also has a list of "CoursesDTO" derived from the mapToDTO below this one
     private StudentsDTO mapToDTO(Students students) {
         StudentsDTO dto = new StudentsDTO();
         dto.setId(students.getId());

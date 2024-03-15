@@ -6,7 +6,8 @@ import java.util.List;
 
 public interface CoursesRepository extends JpaRepository<Courses, Long> {
 
-    List<Courses> findByNameContainingOrderById(String name);
-    List<Courses> findByDescriptionContainingOrderById(String description);
+    List<Courses> findByNameContaining(String name);
+
+    List<Courses> findByDescriptionContaining(String description);
 
 }

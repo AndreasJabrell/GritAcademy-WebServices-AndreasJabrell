@@ -3,10 +3,15 @@ com\GritAcademyPortal\courses\CoursesController.class
 com\GritAcademyPortal\courses\CoursesRepository.class
 com\GritAcademyPortal\students\StudentsController.class
 com\GritAcademyPortal\courses\Courses.class
+com\GritAcademyPortal\studentsCourses\StudentsCoursesRepository.class
+com\GritAcademyPortal\HomeController.class
 com\GritAcademyPortal\students\StudentsService.class
 com\GritAcademyPortal\students\StudentsRepository.class
 com\GritAcademyPortal\GritAcademyPortalApplication.class
+com\GritAcademyPortal\courses\CoursesDTO.class
 com\GritAcademyPortal\students\Students.class
+com\GritAcademyPortal\students\StudentsDTO.class
 com\GritAcademyPortal\studentsCourses\StudentsCourses.class
 com\GritAcademyPortal\courses\CoursesService.class
 com\GritAcademyPortal\studentsCourses\StudentsCoursesController.class
+com\GritAcademyPortal\studentsCourses\StudentsCoursesDTO.class
