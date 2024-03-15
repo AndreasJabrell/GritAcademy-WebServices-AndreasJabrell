@@ -48,24 +48,4 @@ public class StudentsCoursesService {
         }
         return dto;
     }
-    /**
-     *Detta är ett änsålänge misslyckat försök på att få ut kurserna som tillhör eleven på ett snyggt sätt.
-     * Med ovan mapToDTO blir jobbet gjort men det känns lite klöddigt?
-     */
-/*    private StudentsCoursesDTO mapToDTO(StudentsCourses studentsCourses) {
-        StudentsCoursesDTO dto = new StudentsCoursesDTO();
-        dto.setId(studentsCourses.getId());
-        dto.setStudents_id(studentsCourses.getStudentsId().getId());
-        dto.setCourseName(studentsCourses.getCoursesId().getName());
-
-        // Populate list of course IDs
-        List<Integer> courseIds = new ArrayList<>();
-        for (Courses course : studentsCourses.getStudentsId().getCourses()) {
-            courseIds.add(course.getId());
-            dto.setCourseName(course.getName());
-        }
-        dto.setCourses_id(courseIds);
-
-        return dto;
-        }*/
 }

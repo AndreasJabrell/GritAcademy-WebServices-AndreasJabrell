@@ -3,7 +3,9 @@ package com.GritAcademyPortal.students;
 import com.GritAcademyPortal.courses.Courses;
 import com.GritAcademyPortal.courses.CoursesDTO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -20,12 +22,26 @@ public class StudentsService {
     public List<StudentsDTO> getStudents() {
         List<StudentsDTO> studentsDTO = new ArrayList<>();
 
-        studentsRepository.findAll().forEach(students -> studentsDTO.add(this.mapToDTO(students)));
+        studentsRepository.findAll().forEach(students -> studentsDTO.add(this.mapToDTOBasic(students)));
         return studentsDTO;
 
     }
 
-    public List<StudentsDTO> getCoursesForStudents(Integer id) {
+/*
+    public List<StudentsDTO> findStudentById(Integer id){
+        List<StudentsDTO> studentsDTO = new ArrayList<>();
+        studentsRepository.findById(id).forEach(students -> studentsDTO.add(this.mapToDTOBasic(students)));
+        return studentsDTO;
+    }
+*/
+
+    @Transactional
+    public void deleteById(Long id){
+        studentsRepository.deleteStudentsById(id);
+    }
+
+
+    public List<StudentsDTO> getCoursesForStudents(Long id) {
         Optional<Students> students = studentsRepository.findById(id).map(students1 -> {
             students1.getCourses().size();
             return students1;
@@ -88,6 +104,16 @@ public class StudentsService {
      * return dto;
      * }
      **/
+
+    private StudentsDTO mapToDTOBasic(Students students) {
+        StudentsDTO dto = new StudentsDTO();
+        dto.setId(students.getId());
+        dto.setFName(students.getFName());
+        dto.setLName(students.getLName());
+        dto.setTown(students.getTown());
+        return dto;
+    }
+
     private StudentsDTO mapToDTO(Students students) {
         StudentsDTO dto = new StudentsDTO();
         dto.setId(students.getId());

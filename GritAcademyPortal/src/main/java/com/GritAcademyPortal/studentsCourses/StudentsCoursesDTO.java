@@ -4,11 +4,10 @@ import lombok.Data;
 
 @Data
 public class StudentsCoursesDTO {
-    private Integer id;
-    private Integer students_id;
-    private Integer courses_id;
+    private Long id;
+    private Long students_id;
+    private Long courses_id;
     private String courseName;
     private String studentName;
     private String studentTown;
-
 }

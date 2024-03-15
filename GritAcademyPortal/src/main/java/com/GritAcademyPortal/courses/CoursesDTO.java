@@ -8,7 +8,7 @@ import java.util.List;
 @Data
 public class CoursesDTO {
     List<StudentsDTO> students;
-    private Integer id;
+    private Long id;
     private String name;
     private Integer YHP;
     private String description;

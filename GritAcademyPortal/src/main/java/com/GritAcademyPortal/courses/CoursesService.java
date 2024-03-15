@@ -48,7 +48,7 @@ public class CoursesService {
         }
     }
 
-    public List<CoursesDTO> getCoursesByIdWithStudents(Integer id) {
+    public List<CoursesDTO> getCoursesByIdWithStudents(Long id) {
         Optional<Courses> studentsList = coursesRepository.findById(id);
         if (studentsList.isPresent()) {
             return studentsList.stream()

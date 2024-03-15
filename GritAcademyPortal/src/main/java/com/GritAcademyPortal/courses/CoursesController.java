@@ -35,7 +35,7 @@ public class CoursesController {
     }
 
     @GetMapping(value = "/coursesbyidwithstudents/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<CoursesDTO>> getCoursesByIdWithStudents(@PathVariable(value = "id") Integer id) {
+    public ResponseEntity<List<CoursesDTO>> getCoursesByIdWithStudents(@PathVariable(value = "id") Long id) {
         List<CoursesDTO> coursesDTO = coursesService.getCoursesByIdWithStudents(id);
         return new ResponseEntity<>(coursesDTO, HttpStatus.OK);
     }

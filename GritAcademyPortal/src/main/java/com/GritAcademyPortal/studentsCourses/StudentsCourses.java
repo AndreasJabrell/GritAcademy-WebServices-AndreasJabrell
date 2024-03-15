@@ -20,7 +20,7 @@ public class StudentsCourses {
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
 
     @ManyToOne
     @JoinColumn(name = "students_id", referencedColumnName = "id")

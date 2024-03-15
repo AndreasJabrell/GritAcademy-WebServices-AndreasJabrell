@@ -4,7 +4,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 
-public interface StudentsRepository extends JpaRepository<Students, Integer> {
+public interface StudentsRepository extends JpaRepository<Students, Long> {
 
     List<Students> findByfNameContaining(String fName);
 
@@ -12,4 +12,5 @@ public interface StudentsRepository extends JpaRepository<Students, Integer> {
 
     List<Students> findByTownContainingOrderByTown(String town);
 
+    void deleteStudentsById(Long id);
 }
