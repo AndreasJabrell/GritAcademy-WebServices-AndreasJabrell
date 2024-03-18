@@ -10,7 +10,7 @@ public class HomeController {
 
     @GetMapping(value = "/")
     public ModelAndView homePage(Model model) {
-        model.addAttribute("message", "Bajsmacka");
+        model.addAttribute("message", "Klicka på det du vill få mer info om");
         ModelAndView mav = new ModelAndView("homePage");
         return mav;
     }

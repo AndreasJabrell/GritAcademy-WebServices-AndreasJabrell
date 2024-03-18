@@ -10,8 +10,9 @@
 <body>
 
 <h1>Demo JSP webpage showing rest endpoints</h1>
-<p>${message}</p>
-<form id="createStudent" action="/createStudent/" method="POST">
+<!--<p>${message}</p>-->
+<p>Skriv in följande info för att lägga till student</p>
+<form id="createStudent" action="/createStudent" method="POST">
     <label for="fName" >fName</label>
     <input type="text" id="fName" name="fName" required>    <br>
     <label for="lName">lName</label>
@@ -19,24 +20,35 @@
     <label for="town">town</label>
     <input type="text" id="town" name="town" required>    <br>
     <br>
-    <a href="http://localhost:8567/createStudent/ title=Create Student">
+    <a href="http://localhost:8567/createStudent title=Create Student">
     <input class="btn" type="submit" value="Lägg till student"><br>
     </a>
 </form>
 <br>
 <hr>
 
-<div style=text-align:center;>\n
-            <a href=http://localhost:8567/courses/ title=Courses> Courses</a>
-            <a href=http://localhost:8567/students/ title=Students> Students</a>
-            <a href=http://localhost:8567/ title=Home> Home</a>
-            </div>
+<div style=text-align:center;>
+    <p>Klicka här för att se alla kurser</p>
+    <a href=http://localhost:8567/courses/ title=Courses><br>
+        <button type="button">KURSER</button>
+    </a><br>
+    <h4>Klicka här för studenter</h4>
+    <a href=http://localhost:8567/students title=Students><br>
+        <button type="button">STUDENTER</button>
+    </a><br>
+    <h4>Hem</h4>
+    <a href=http://localhost:8567/ title=Home><br>
+        <button type="button">HEM</button>
+    </a><br>
+</div>
 <br>
-<form action="removeStudentForm" method="POST">
-    id <input type="text" name="id" required>
+<form action="removeStudent/{id}" method="POST">
+    id <input type="text" id="id" name="id" required>
     <br>
     <br>
-    <input class="btn" type="submit" value="REMOVE_STUDENT">
+    <a href="http://localhost:8567/removeStudent/{id} title=Remove Student">
+    <input class="btn" type="submit" value="Ta bort student">
+    </a>
 </form>
 <br>
 <hr>
