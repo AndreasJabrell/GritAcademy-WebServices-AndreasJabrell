@@ -6,6 +6,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.lang.reflect.Parameter;
 import java.util.List;
 
 @RestController
@@ -52,11 +53,11 @@ public class StudentsController {
         return new ResponseEntity<>(studentsService.getStudents(), HttpStatus.OK);
     }
     /**CREATESTUDENT ÄR UNDER UPPBYGGNAD**/
-/*    @PostMapping(value = "/createStudent")
-    public ResponseEntity<Students> createStudent(@RequestBody() Students student){
+    @PostMapping(value = "/createStudent/")
+    public ResponseEntity<Students> createStudent(@ModelAttribute Students student){
         System.out.println(student);
         student = studentsService.saveStudent(student);
         return new ResponseEntity<>(student, HttpStatus.CREATED);
-    }*/
+    }
 
 }

@@ -2,7 +2,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+
+    <meta http-equiv="content-type" content="text/html" charset="ISO-8859-1" />
     <title>HomE Page</title>
     <link rel="stylesheet" href="style.css">
 </head>
@@ -10,29 +11,26 @@
 
 <h1>Demo JSP webpage showing rest endpoints</h1>
 <p>${message}</p>
-<form id="createStudent" action="/createStudentForm" method="POST">
+<form id="createStudent" action="/createStudent/" method="POST">
     <label for="fName" >fName</label>
     <input type="text" id="fName" name="fName" required>    <br>
     <label for="lName">lName</label>
     <input type="text" id="lName" name="lName" required>    <br>
     <label for="town">town</label>
     <input type="text" id="town" name="town" required>    <br>
-    <label for="hobby">hobby</label>
-    <input type="text" id="hobby" name="hobby" required>    <br>
-    <label for="email">email</label>
-    <input type="text" id="email" name="email" required>    <br>
-    <label for="phone">phone</label>
-    <input type="text" id="phone" name="phone" required>    <br>
-    <label for="username">username</label>
-    <input type="text" id="username" name="username" required>    <br>
-    <label for="password">password</label>
-    <input type="text" id="password" name="password" required>    <br>
     <br>
-    <input class="btn" type="submit" value="CREATE_STUDENT"><br>
-
+    <a href="http://localhost:8567/createStudent/ title=Create Student">
+    <input class="btn" type="submit" value="Lägg till student"><br>
+    </a>
 </form>
 <br>
 <hr>
+
+<div style=text-align:center;>\n
+            <a href=http://localhost:8567/courses/ title=Courses> Courses</a>
+            <a href=http://localhost:8567/students/ title=Students> Students</a>
+            <a href=http://localhost:8567/ title=Home> Home</a>
+            </div>
 <br>
 <form action="removeStudentForm" method="POST">
     id <input type="text" name="id" required>

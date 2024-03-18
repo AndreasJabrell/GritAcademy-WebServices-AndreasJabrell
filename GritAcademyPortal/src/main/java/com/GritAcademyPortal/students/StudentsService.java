@@ -86,6 +86,8 @@ public class StudentsService {
         dto.setTown(students.getTown());
         return dto;
     }
+
+
     //Used to display students with courses as it also has a list of "CoursesDTO" derived from the mapToDTO below this one
     private StudentsDTO mapToDTO(Students students) {
         StudentsDTO dto = new StudentsDTO();
