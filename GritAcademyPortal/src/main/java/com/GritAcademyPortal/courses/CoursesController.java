@@ -11,50 +11,49 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@RequestMapping(value ="/courses")
 public class CoursesController {
 
     @Autowired
     CoursesService coursesService;
 
-    @GetMapping(value = "/courses/", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<CoursesDTO>> getCourses() {
         List<CoursesDTO> allCourses = coursesService.getCourses();
         return new ResponseEntity<>(allCourses, HttpStatus.OK);
     }
 
-    @GetMapping(value = "/coursesname/{name}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<CoursesDTO>> getCoursesByName(@PathVariable(value = "name") String name) {
-        List<CoursesDTO> coursesDTO = coursesService.getCoursesByName(name);
-        return new ResponseEntity<>(coursesDTO, HttpStatus.OK);
-    }
-
-    @GetMapping(value = "/coursesdescription/{description}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<CoursesDTO>> getCoursesByDescription(@PathVariable(value = "description") String description) {
+    @GetMapping(value = "/description/{description}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<CoursesDTO>> getCoursesByDescription(@RequestParam String description) {
         List<CoursesDTO> coursesDTO = coursesService.getCoursesByDescription(description);
         return new ResponseEntity<>(coursesDTO, HttpStatus.OK);
     }
 
-    @GetMapping(value = "/coursesbyidwithstudents/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<CoursesDTO>> getCoursesByIdWithStudents(@PathVariable(value = "id") Long id) {
+    @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<CoursesDTO>> getCoursesByIdWithStudents(@RequestParam Long id) {
         List<CoursesDTO> coursesDTO = coursesService.getCoursesByIdWithStudents(id);
         return new ResponseEntity<>(coursesDTO, HttpStatus.OK);
     }
 
-    @GetMapping(value = "/coursesbynamewithstudents/{name}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<CoursesDTO>> getCoursesByNameWithStudents(@PathVariable(value = "name") String name) {
+    @GetMapping(value = "/name/{Name}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<CoursesDTO>> getCoursesByName(@RequestParam(value = "name") String name) {
+        List<CoursesDTO> studentsDTO = coursesService.getCoursesByName(name);
+        return new ResponseEntity<>(studentsDTO, HttpStatus.OK);
+    }
+    @GetMapping(value = "/name/students/{name}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<CoursesDTO>> getCoursesByNameWithStudents(@RequestParam String name) {
         List<CoursesDTO> coursesDTO = coursesService.getCoursesByNameWithStudents(name);
         return new ResponseEntity<>(coursesDTO, HttpStatus.OK);
     }
 
-    @PostMapping(value = "/createCourse")
+    @PostMapping(value = "/create")
     public ResponseEntity<Courses> createCourse(@ModelAttribute Courses course){
         System.out.println(course);
         course = coursesService.saveCourse(course);
         return new ResponseEntity<>(course, HttpStatus.CREATED);
     }
 
-    /**ÄNDRA DENNA ska vara @requestParam, kan också ändra URL till students/remove/{id} för att vara konsekvent**/
-    @RequestMapping(value = "/removeCourse/{id}", method = {RequestMethod.GET, RequestMethod.POST}, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/remove/{id}", method = {RequestMethod.GET, RequestMethod.POST}, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<CoursesDTO>> removeCourse(@RequestParam(value = "id") Long id) {
         System.out.println(id);
         coursesService.removeCourseById(id);

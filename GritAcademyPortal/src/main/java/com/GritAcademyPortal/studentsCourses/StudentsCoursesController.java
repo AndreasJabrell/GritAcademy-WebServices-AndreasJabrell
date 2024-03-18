@@ -11,28 +11,19 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@RequestMapping(value = "/studentsCourses")
 public class StudentsCoursesController {
 
     @Autowired
     StudentsCoursesService studentsCoursesService;
 
-    @GetMapping(value = "/studentscourses/", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<StudentsCoursesDTO>> getStudentsCourses() {
         List<StudentsCoursesDTO> allStudents = studentsCoursesService.getStudentsCourses();
         return new ResponseEntity<>(allStudents, HttpStatus.OK);
     }
 
-            /**SKA HÄR IN DTO???**/
-/*    @PostMapping(value = "/createStudentCourse")
-    public ResponseEntity<StudentsCourses> createStudentCourse(@ModelAttribute StudentsCourses studentsCourses){
-        System.out.println(studentsCourses);
-        studentsCourses = studentsCoursesService.saveStudentsCourses(studentsCourses);
-        return new ResponseEntity<>(studentsCourses, HttpStatus.CREATED);
-    }*/
-
-    /** Prova detta istället! Har lagt in delete med som borde funka nu. Eftersom att detta är manytomany så måste
-     * vi köra ut den nya listan via DTO för att undvika rundgång. Annars kaozbajz**/
-    @PostMapping(value = "/createStudentCourse")
+    @PostMapping(value = "/create")
     public ResponseEntity<List<StudentsCoursesDTO>> createStudentCourse(@ModelAttribute StudentsCourses studentsCourses) {
         System.out.println(studentsCourses);
         studentsCourses = studentsCoursesService.saveStudentsCourses(studentsCourses);
@@ -43,12 +34,14 @@ public class StudentsCoursesController {
          Så vi kallar på den metoden från service för att kunna skriva ut allt på rätt sätt.**/
     }
 
-    @RequestMapping(value = "/removeStudentCourse/{id}", method = {RequestMethod.GET, RequestMethod.POST}, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<StudentsCoursesDTO>> removeStudentCourse(@RequestParam(value = "id") Long id) {
+
+    /**REMOVE MÅSTE FIXAS**/
+    /*@PostMapping(value = "/remove/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<StudentsCoursesDTO>> removeStudentCourse(@ModelAttribute StudentsCourses studentsCourses) {
         System.out.println(id);
         studentsCoursesService.removeStudentsCoursesById(id);
         List<StudentsCoursesDTO> studentsCoursesDTOList = studentsCoursesService.getStudentsCourses();
         return new ResponseEntity<>(studentsCoursesDTOList, HttpStatus.CREATED);
-    }
+    }*/
 
 }

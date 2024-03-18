@@ -1,0 +1,16 @@
+.Form {
+    display: table;
+    border: 5px solid red;
+}
+.ParagraphForm {
+    display: table-row;
+}
+.FormCell {
+    display: table-cell;
+    text-align: right
+}
+
+.rubrik {
+    text-align:center;
+}
+

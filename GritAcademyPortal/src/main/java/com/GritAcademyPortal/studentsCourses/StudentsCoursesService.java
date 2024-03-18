@@ -34,6 +34,11 @@ public class StudentsCoursesService {
     public StudentsCourses saveStudentsCourses(StudentsCourses studentsCourses) {
         return studentsCoursesRepository.save(studentsCourses); }
 
+    /**REMOVE MÅSTE FIXAS**/
+
+    /*public StudentsCourses deleteStudentsCourses(StudentsCourses studentsCourses) {
+        return studentsCoursesRepository.save(studentsCourses); }*/
+
     private StudentsCoursesDTO mapToDTO(StudentsCourses studentsCourses) {
         StudentsCoursesDTO dto = new StudentsCoursesDTO();
         dto.setId(studentsCourses.getId());
