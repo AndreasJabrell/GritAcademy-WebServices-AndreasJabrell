@@ -24,9 +24,9 @@ public class StudentsCourses {
 
     @ManyToOne
     @JoinColumn(name = "students_id", referencedColumnName = "id")
-    private Students studentsId;
+    private Students students_id;
 
     @ManyToOne
     @JoinColumn(name = "courses_id", referencedColumnName = "id")
-    private Courses coursesId;
+    private Courses courses_id;
 }

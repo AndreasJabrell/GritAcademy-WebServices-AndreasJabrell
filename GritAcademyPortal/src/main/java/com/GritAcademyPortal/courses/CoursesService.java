@@ -25,6 +25,13 @@ public class CoursesService {
         return coursesDTO;
 
     }
+    public void removeCourseById(Long id) {
+        coursesRepository.deleteById(id);
+    }
+
+    public Courses saveCourse(Courses courses) {
+        return coursesRepository.save(courses);
+    }
 
     public List<CoursesDTO> getCoursesByName(String name) {
         List<Courses> coursesList = coursesRepository.findByNameContaining(name);

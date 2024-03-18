@@ -27,19 +27,24 @@ public class StudentsCoursesService {
         return studentsCoursesDTO;
     }
 
+
+    public StudentsCourses saveStudentsCourses(StudentsCourses studentsCourses) {
+        return studentsCoursesRepository.save(studentsCourses); /**SKA HÄR IN DTO???**/
+    }
+
     private StudentsCoursesDTO mapToDTO(StudentsCourses studentsCourses) {
         StudentsCoursesDTO dto = new StudentsCoursesDTO();
         dto.setId(studentsCourses.getId());
 
         //Populate DTO with course details
-        Courses course = studentsCourses.getCoursesId();
+        Courses course = studentsCourses.getCourses_id();
         if (course != null) {
             dto.setCourses_id(course.getId());
             dto.setCourseName(course.getName());
             //Set other course properties as needed
         }
 
-        Students student = studentsCourses.getStudentsId();
+        Students student = studentsCourses.getStudents_id();
         if (student != null) {
             dto.setStudents_id(student.getId());
             dto.setStudentName(student.getFName() + " " + student.getLName());
