@@ -1,14 +1,12 @@
 package com.GritAcademyPortal.studentsCourses;
 
+import com.GritAcademyPortal.courses.CoursesDTO;
 import com.GritAcademyPortal.students.Students;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -24,13 +22,33 @@ public class StudentsCoursesController {
         return new ResponseEntity<>(allStudents, HttpStatus.OK);
     }
 
-
             /**SKA HÄR IN DTO???**/
-    @PostMapping(value = "/createStudentCourse")
+/*    @PostMapping(value = "/createStudentCourse")
     public ResponseEntity<StudentsCourses> createStudentCourse(@ModelAttribute StudentsCourses studentsCourses){
         System.out.println(studentsCourses);
         studentsCourses = studentsCoursesService.saveStudentsCourses(studentsCourses);
         return new ResponseEntity<>(studentsCourses, HttpStatus.CREATED);
+    }*/
+
+    /** Prova detta istället! Har lagt in delete med som borde funka nu. Eftersom att detta är manytomany så måste
+     * vi köra ut den nya listan via DTO för att undvika rundgång. Annars kaozbajz**/
+    @PostMapping(value = "/createStudentCourse")
+    public ResponseEntity<List<StudentsCoursesDTO>> createStudentCourse(@ModelAttribute StudentsCourses studentsCourses) {
+        System.out.println(studentsCourses);
+        studentsCourses = studentsCoursesService.saveStudentsCourses(studentsCourses);
+        //After saving the new StudentsCourses object, fetch the updated list of StudentsCoursesDTO
+        List<StudentsCoursesDTO> studentsCoursesDTOList = studentsCoursesService.getStudentsCourses();
+        return new ResponseEntity<>(studentsCoursesDTOList, HttpStatus.CREATED); /** HÄR SKULLE IN DTO, MEN BEHÖVER GÖRA
+         LISTAN FÖRST SOM OVAN SOM STÄLLER EN NY FRÅGA TILL DB OCH SKRIVER UT. Egentligen exakt samma som i getStudentsCourses.
+         Så vi kallar på den metoden från service för att kunna skriva ut allt på rätt sätt.**/
+    }
+
+    @RequestMapping(value = "/removeStudentCourse/{id}", method = {RequestMethod.GET, RequestMethod.POST}, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<StudentsCoursesDTO>> removeStudentCourse(@RequestParam(value = "id") Long id) {
+        System.out.println(id);
+        studentsCoursesService.removeStudentsCoursesById(id);
+        List<StudentsCoursesDTO> studentsCoursesDTOList = studentsCoursesService.getStudentsCourses();
+        return new ResponseEntity<>(studentsCoursesDTOList, HttpStatus.CREATED);
     }
 
 }

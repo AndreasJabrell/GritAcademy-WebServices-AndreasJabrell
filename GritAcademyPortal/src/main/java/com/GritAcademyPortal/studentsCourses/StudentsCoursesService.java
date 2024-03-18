@@ -27,10 +27,12 @@ public class StudentsCoursesService {
         return studentsCoursesDTO;
     }
 
+    public void removeStudentsCoursesById(Long id) {
+        studentsCoursesRepository.deleteById(id);
+    }
 
     public StudentsCourses saveStudentsCourses(StudentsCourses studentsCourses) {
-        return studentsCoursesRepository.save(studentsCourses); /**SKA HÄR IN DTO???**/
-    }
+        return studentsCoursesRepository.save(studentsCourses); }
 
     private StudentsCoursesDTO mapToDTO(StudentsCourses studentsCourses) {
         StudentsCoursesDTO dto = new StudentsCoursesDTO();
