@@ -26,7 +26,8 @@ public class StudentsCoursesController {
     @PostMapping(value = "/create")
     public ResponseEntity<List<StudentsCoursesDTO>> createStudentCourse(@ModelAttribute StudentsCourses studentsCourses) {
         System.out.println(studentsCourses);
-        studentsCourses = studentsCoursesService.saveStudentsCourses(studentsCourses);
+        /**"studentsCourses =" behöver inte denna delen om vi ska skicka tillbaka hela tabellen och inte bara det tillagda.**/
+        studentsCoursesService.saveStudentsCourses(studentsCourses);
         //After saving the new StudentsCourses object, fetch the updated list of StudentsCoursesDTO
         List<StudentsCoursesDTO> studentsCoursesDTOList = studentsCoursesService.getStudentsCourses();
         return new ResponseEntity<>(studentsCoursesDTOList, HttpStatus.CREATED); /** HÄR SKULLE IN DTO, MEN BEHÖVER GÖRA
@@ -34,20 +35,11 @@ public class StudentsCoursesController {
          Så vi kallar på den metoden från service för att kunna skriva ut allt på rätt sätt.**/
     }
 
-
     /**REMOVE MÅSTE FIXAS. Detta bör funka!!**/
-    @PostMapping(value = "/removeCourse/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "/removeStudentsCourses/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<StudentsCoursesDTO>> removeCoursesById(@RequestParam Long id) {
         System.out.println(id);
-        studentsCoursesService.deleteByCoursesId(id);
-        List<StudentsCoursesDTO> studentsCoursesDTOList = studentsCoursesService.getStudentsCourses();
-        return new ResponseEntity<>(studentsCoursesDTOList, HttpStatus.CREATED);
-    }
-
-    @PostMapping(value = "/removeStudent/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<StudentsCoursesDTO>> removeStudentsById(@RequestParam Long id) {
-        System.out.println(id);
-        studentsCoursesService.deleteByStudentsId(id);
+        studentsCoursesService.deleteById(id);
         List<StudentsCoursesDTO> studentsCoursesDTOList = studentsCoursesService.getStudentsCourses();
         return new ResponseEntity<>(studentsCoursesDTOList, HttpStatus.CREATED);
     }

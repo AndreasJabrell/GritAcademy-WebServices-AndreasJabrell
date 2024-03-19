@@ -35,12 +35,9 @@ public class StudentsCoursesService {
         return studentsCoursesRepository.save(studentsCourses); }
 
     /**REMOVE MÅSTE FIXAS**/
+    public void deleteById(Long id) {
+        studentsCoursesRepository.deleteById(id); }
 
-    public StudentsCourses deleteByCoursesId(Long CoursesId) {
-        return studentsCoursesRepository.deleteStudentsCoursesByCourses_id(CoursesId); }
-
-    public StudentsCourses deleteByStudentsId(Long StudentsId) {
-        return studentsCoursesRepository.deleteStudentsCoursesByStudents_id(StudentsId); }
 
     private StudentsCoursesDTO mapToDTO(StudentsCourses studentsCourses) {
         StudentsCoursesDTO dto = new StudentsCoursesDTO();

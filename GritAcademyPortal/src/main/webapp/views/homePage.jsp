@@ -261,26 +261,12 @@
 <hr>
 <div>
     <p>Skriv in ID på den kurs ni önskar radera från associationstabellen.</p>
-    <form action="removeCourse/{id}" method="Post">
+    <form action="removeStudentsCourses/{id}" method="Post">
         <label for="id">ID</label>
         <input type="text" name="id" required>
         <br>
         <br>
-        <a href="http://localhost:8567/removeCourse/{id} title=Remove_Association_Course">
-            <input class="btn" type="submit" value="Radera">
-        </a>
-    </form>
-</div>
-<br>
-<hr>
-<div>
-    <p>Skriv in ID på den elev ni önskar radera från associationstabellen.</p>
-    <form action="removeStudent/{id}" method="Post">
-        <label for="id">ID</label>
-        <input type="text" name="id" required>
-        <br>
-        <br>
-        <a href="http://localhost:8567/removeStudent/{id} title=Remove_Association_Student">
+        <a href="http://localhost:8567/removeStudentsCourses/{id} title=Remove_Association">
             <input class="btn" type="submit" value="Radera">
         </a>
     </form>
