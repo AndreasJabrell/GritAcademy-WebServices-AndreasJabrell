@@ -35,13 +35,21 @@ public class StudentsCoursesController {
     }
 
 
-    /**REMOVE MÅSTE FIXAS**/
-    /*@PostMapping(value = "/remove/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<StudentsCoursesDTO>> removeStudentCourse(@ModelAttribute StudentsCourses studentsCourses) {
+    /**REMOVE MÅSTE FIXAS. Detta bör funka!!**/
+    @PostMapping(value = "/removeCourse/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<StudentsCoursesDTO>> removeCoursesById(@RequestParam Long id) {
         System.out.println(id);
-        studentsCoursesService.removeStudentsCoursesById(id);
+        studentsCoursesService.deleteByCoursesId(id);
         List<StudentsCoursesDTO> studentsCoursesDTOList = studentsCoursesService.getStudentsCourses();
         return new ResponseEntity<>(studentsCoursesDTOList, HttpStatus.CREATED);
-    }*/
+    }
+
+    @PostMapping(value = "/removeStudent/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<StudentsCoursesDTO>> removeStudentsById(@RequestParam Long id) {
+        System.out.println(id);
+        studentsCoursesService.deleteByStudentsId(id);
+        List<StudentsCoursesDTO> studentsCoursesDTOList = studentsCoursesService.getStudentsCourses();
+        return new ResponseEntity<>(studentsCoursesDTOList, HttpStatus.CREATED);
+    }
 
 }
