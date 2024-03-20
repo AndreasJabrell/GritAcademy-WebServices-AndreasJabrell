@@ -25,6 +25,7 @@ public class CoursesService {
         return coursesDTO;
 
     }
+
     public void removeCourseById(Long id) {
         coursesRepository.deleteById(id);
     }
@@ -76,6 +77,7 @@ public class CoursesService {
             return Collections.emptyList();
         }
     }
+
     //Used to only display the course/s
     private CoursesDTO mapToDTOBasic(Courses courses) {
         CoursesDTO dto = new CoursesDTO();

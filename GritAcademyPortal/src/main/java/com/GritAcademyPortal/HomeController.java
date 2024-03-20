@@ -14,11 +14,4 @@ public class HomeController {
         ModelAndView mav = new ModelAndView("homePage");
         return mav;
     }
-
-    /*@GetMapping(value = "/error")
-    public ModelAndView error(Model model) {
-        model.addAttribute("message", "Någor gick fel");
-        ModelAndView mav = new ModelAndView("error");
-        return mav;
-    }*/
 }

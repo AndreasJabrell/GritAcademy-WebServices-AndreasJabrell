@@ -32,11 +32,12 @@ public class StudentsCoursesService {
     }
 
     public StudentsCourses saveStudentsCourses(StudentsCourses studentsCourses) {
-        return studentsCoursesRepository.save(studentsCourses); }
+        return studentsCoursesRepository.save(studentsCourses);
+    }
 
-    /**REMOVE MÅSTE FIXAS**/
     public void deleteById(Long id) {
-        studentsCoursesRepository.deleteById(id); }
+        studentsCoursesRepository.deleteById(id);
+    }
 
 
     private StudentsCoursesDTO mapToDTO(StudentsCourses studentsCourses) {

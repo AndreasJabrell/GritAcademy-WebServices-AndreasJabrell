@@ -1,7 +1,5 @@
 package com.GritAcademyPortal.studentsCourses;
 
-import com.GritAcademyPortal.courses.CoursesDTO;
-import com.GritAcademyPortal.students.Students;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -30,12 +28,9 @@ public class StudentsCoursesController {
         studentsCoursesService.saveStudentsCourses(studentsCourses);
         //After saving the new StudentsCourses object, fetch the updated list of StudentsCoursesDTO
         List<StudentsCoursesDTO> studentsCoursesDTOList = studentsCoursesService.getStudentsCourses();
-        return new ResponseEntity<>(studentsCoursesDTOList, HttpStatus.CREATED); /** HÄR SKULLE IN DTO, MEN BEHÖVER GÖRA
-         LISTAN FÖRST SOM OVAN SOM STÄLLER EN NY FRÅGA TILL DB OCH SKRIVER UT. Egentligen exakt samma som i getStudentsCourses.
-         Så vi kallar på den metoden från service för att kunna skriva ut allt på rätt sätt.**/
+        return new ResponseEntity<>(studentsCoursesDTOList, HttpStatus.CREATED);
     }
 
-    /**REMOVE MÅSTE FIXAS. Detta bör funka!!**/
     @PostMapping(value = "/removeStudentsCourses/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<StudentsCoursesDTO>> removeCoursesById(@RequestParam Long id) {
         System.out.println(id);
